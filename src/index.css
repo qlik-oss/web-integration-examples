@@ -1,0 +1,11 @@
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+span code {
+  background-color: #91a;
+  color: #f1f1f1;
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+}
