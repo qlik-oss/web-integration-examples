@@ -1,0 +1,17 @@
+{
+  "name": "plain-web-app",
+  "version": "1.0.0",
+  "description": "A plain web application example using the Qlik backend APIs without mashup/capability APIs",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "author": "Qliktech International AB",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "1.12.3"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.26.0"
+  }
+}
