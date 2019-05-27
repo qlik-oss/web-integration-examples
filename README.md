@@ -8,7 +8,7 @@ This is a simple web application that uses the new Qlik SaaS APIs to showcase ho
 * Sign in users on a Qlik Sense Enterprise on Kubernetes deployment or QCS tenant
 * Configure REST calls to work against said deployments
 
-## Prerequsites
+## Prerequisites
 
 * Some modern web development knowledge (Node.js / browsers)
 * A Qlik Sense Enterprise on Kubernetes or QCS tenant configured
