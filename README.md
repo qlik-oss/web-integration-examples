@@ -1,5 +1,7 @@
 # Web app using Qlik backend APIs
 
+**Note: Work on progress. You cannot get redirected back to your web app yet. You need to manually sign in and return to your web app again.**
+
 This is a simple web application that uses the new Qlik SaaS APIs to showcase how you can:
 
 * Build modern web applications and integrate with Qlik APIs
