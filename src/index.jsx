@@ -9,13 +9,15 @@ import './index.css';
 import ErrorBoundary from './error-boundary';
 import Account from './account';
 
+const url = new URL(location.href);
+
 // this should correspond to the QCS tenant URL, or QSE on Kubernetes deployment:
-const tenantUrl = 'https://elastic.example';
+const tenantUrl = url.searchParams.get('tenant') || 'https://elastic.example';
 
 // this should correspond to an web integration id that:
 // 1) exists in the `tenantUrl` above (create a new one using Management Console -> Integrations)
 // 2) has the domain for this web app in its whitelisted domain
-const webIntegrationId = 'pFgisqzsUcy8k47jNKJA01ru6P7SUig9';
+const webIntegrationId = url.searchParams.get('wiid') || 'pFgisqzsUcy8k47jNKJA01ru6P7SUig9';
 
 // configures the REST library with the appropriate tenant-specific settings:
 // * tenantUrl as a base for all requests
