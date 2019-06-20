@@ -18,7 +18,7 @@ export default function Account({ tenantUrl, webIntegrationId }) {
     // build a single-sign on URL and return back here once completed:
     const url = new URL(`${tenantUrl}/login`);
     url.searchParams.append('returnto', location.href);
-    url.searchParams.append('web-integration-id', webIntegrationId);
+    url.searchParams.append('qlik-web-integration-id', webIntegrationId);
     return render(
       <React.Fragment>
         <p>You are not logged in, if you previously had a session you need to login again.</p>
