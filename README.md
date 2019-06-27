@@ -1,32 +1,25 @@
-# Web app using Qlik backend APIs
+# Web Integration Examples
 
-**Note: Work on progress. You cannot get redirected back to your web app yet. You need to manually sign in and return to your web app again.**
+Web Integrations is an implementation around the browser CORS mechanism used in QSEoK and QCS. Web Integrations allows a tenant admin to control which third-party domains are allowed to interact with their tenant backend APIs. In essence, if you create a web app or mashup that is hosted on another domain than the QSE deployment, you would need to create a web integration in the management console. In each web integration, you maintain a list of allowed (whitelisted) origins/domains.
 
-This is a simple web application that uses the new Qlik SaaS APIs to showcase how you can:
+This repository contains various stand-alone web apps and mashups that is meant to showcase how you may use the Qlik APIs to e.g. authenticate users, communicate using REST and websockets, embed Qlik Sense visualizations, and more _inside a browser environment_.
 
-* Build modern web applications and integrate with Qlik APIs
-* Sign in users on a Qlik Sense Enterprise on Kubernetes deployment or QCS tenant
-* Configure REST calls to work against said deployments
+## Web apps
 
-## Prerequisites
+When we use the terminology "web apps" in the context of Qlik Sense, we mean web-based applications in which you want to use the various Qlik backend APIs. Generally this means:
 
-* Some modern web development knowledge (Node.js / browsers)
-* A Qlik Sense Enterprise on Kubernetes or QCS tenant configured
-* Tenant administrator privileges to create a web integration
+* not having to fetch any front-end files (CSS, JavaScript, etc.) from a Qlik deployment
+* where you as the implementor may use any technology of your choice to build your solution
+* wants to build custom visualizations, analytical interfaces, or perhaps administration UIs
 
-## Get started
+## Mashups
 
-Start the web app:
+In the Qlik world, "mashups" usually means to use the Qlik Sense capability APIs and other various front-end files that is hosted by a Qlik deployment, by using those files you will also get things like require.js, angular.js, and other dependencies which may not be optimal for your use case. However, using the mashup approach will allow you to embed existing Qlik Sense visualizations (or create new ones on the fly).
 
-1. Install Node.js if you haven't already, make sure you are on _at least_ version 8.x: https://nodejs.org
-1. Download and unpack, or git clone this repository
-1. Open up a terminal window (Git Bash or similar preferred on Windows) and `cd` into the source code folder
-1. Run `npm install` to install the project dependencies
-1. Run `npm start` which should start a development server, open the link you see in your terminal (likely http://127.0.0.1:1234)
+## Examples
 
-Then, configure your Qlik Sense Enterprise on Kubernetes or QCS tenant (requires tenant admin):
+See below for a high-level explanation of the various web apps and mashups.
 
-1. Go into your management console, e.g. https://mytenant.qcs.com/console
-1. To your left, select _Integrations -> Web_ and create a new web integration, make sure you add http://127.0.0.1:1234 (or whatever URL is shown in your terminal above) to your whitelist
-1. Copy the web integration id and paste it into your web app's [src/index.jsx](./src/index.jsx) file, make sure you also update the tenant URL in that same file
-1. Open up your web app in your browser
+| Title                                  | Description |
+| -------------------------------------- | ----------- |
+| [Plain web app](./plain-web-app)       | This example shows you how to deal with authentication of users, and how to configure and use the necessary web integration and CSRF header when interacting with the Qlik backend APIs. |
