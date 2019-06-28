@@ -9,6 +9,7 @@
   "author": "QlikTech International AB",
   "license": "Apache-2.0",
   "devDependencies": {
+    "live-server": "^1.2.1",
     "parcel-bundler": "1.12.3"
   },
   "dependencies": {
