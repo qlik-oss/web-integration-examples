@@ -2,9 +2,13 @@
   "name": "plain-mashup",
   "version": "1.0.0",
   "description": "An example mashup showing how to use the webIntegrationId when using the capability APIs.",
-  "scripts": {},
+  "scripts": {
+    "start": "npx live-server ./ --host 127.0.0.1"
+  },
   "author": "QlikTech International AB",
   "license": "Apache-2.0",
-  "devDependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
   "dependencies": {}
 }

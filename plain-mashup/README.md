@@ -15,7 +15,7 @@ Start the mashup:
 1. Download and unpack, or git clone this repository
 1. Edit the source code with your preferred Text/code editor and replace all the strings with your tenant URL.
 1. Open up a terminal window (Git Bash or similar preferred on Windows) and `cd` into the source code folder
-
+1. Run `npm install` to install the project dependencies
 1. Run `npm start` which should start a development server, open the link you see in your terminal (likely http://127.0.0.1:8080)
 
 Then, configure your Qlik Sense Enterprise on Kubernetes or QCS tenant (requires tenant admin):
