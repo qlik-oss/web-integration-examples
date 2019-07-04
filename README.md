@@ -20,7 +20,7 @@ In the Qlik world, "mashups" usually means to use the Qlik Sense capability APIs
 
 See below for a high-level explanation of the various web apps and mashups.
 
-| Title                                  | Description |
-| -------------------------------------- | ----------- |
-| [Plain web app](./plain-web-app)       | This example shows you how to deal with authentication of users, and how to configure and use the necessary web integration and CSRF header when interacting with the Qlik backend APIs. |
-| [Plain mashup](./plain-mashup)       | An example on how you can embed Qlik visualizations in a web-page using the capability APIs |
+| Title                                  | Type    | Description |
+| -------------------------------------- | ------- | ----------- |
+| [App Reloader](./app-reloader)         | Web app | This example shows you how to deal with authentication of users, and how to configure and use the necessary web integration and CSRF header when interacting with the Qlik backend APIs. |
+| [Plain mashup](./plain-mashup)         | Mashup  | An example on how you can embed Qlik Sense visualizations in a webpage using the capability APIs. |

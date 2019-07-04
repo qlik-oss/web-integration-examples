@@ -1,0 +1,8 @@
+.app-list table {
+  width: 100%;
+  max-width: 800px;
+}
+
+.app-list th {
+  text-align: left;
+}

@@ -1,12 +1,9 @@
 import React from 'react';
 
-// error boundaries are high-level components that catches errors thrown
-// by child components and presents them to the user or send them to backend
-// log services.
 export default class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { error: false, info: null };
+    this.state = { error: null, info: null };
   }
 
   componentDidCatch(error, info) {
@@ -16,7 +13,8 @@ export default class ErrorBoundary extends React.Component {
   render() {
     const { error, info } = this.state;
     const { children } = this.props;
-    if (error) return (<pre><code>{error.stack}\n{info.componentStack}</code></pre>);
+    if (error && error.status === 401) location.reload();
+    if (error) return (<pre><code>{error.stack}\n{info && info.componentStack}</code></pre>);
     return children;
   }
 }
