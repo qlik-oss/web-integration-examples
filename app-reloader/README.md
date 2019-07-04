@@ -26,8 +26,8 @@ Start the web app:
 
 Then, configure your Qlik Sense Enterprise on Kubernetes or QCS tenant (requires tenant admin):
 
-1. Go into your management console, e.g. https://mytenant.qcs.com/console
+1. Go into your management console, e.g. https://elastic.example/console
 1. To your left, select _Integrations -> Web_ and create a new web integration, make sure you add http://127.0.0.1:1234 (or whatever URL is shown in your terminal above) to your whitelist
 1. Copy the web integration id and:
     * Either paste it into your web app's [src/index.jsx](./src/index.jsx) file, make sure you also update the tenant URL in that same file and save it, then open up/refresh http://127.0.0.1:1234
-    * Add it as query parameters like so: http://127.0.0.1:1234?tenant=https://mytenant.qcs.com&wiid=your-web-integration-id-you-copied-here
+    * Add it as query parameters like so: http://127.0.0.1:1234?tenant=https://elastic.example&wiid=your-web-integration-id-you-copied-here
