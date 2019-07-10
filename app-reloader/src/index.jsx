@@ -26,7 +26,7 @@ const webIntegrationId = url.searchParams.get('wiid') || 'BP57eMwosZKlhGgTScXtNQ
 bootstrap(tenantUrl, webIntegrationId);
 
 const Index = () => {
-  const [/*user*/, userError, userIsLoading] = useBackend({ url: '/v1/users/me' });
+  const [user, userError, userIsLoading] = useBackend({ url: '/v1/users/me' });
   const needsLogin = userError && userError.response && userError.response.status === 401;
   let view;
 
@@ -34,11 +34,13 @@ const Index = () => {
     view = (<p>Loading...</p>);
   } else if (needsLogin) {
     view = <Login tenantUrl={tenantUrl} webIntegrationId={webIntegrationId} />
+  } else if (userError) {
+    view = (<div>Unable to fetch user, likely misconfigured tenant/web integration. <pre><code>{userError.stack}</code></pre></div>);
   } else {
     view = (
     <React.Fragment>
       <Account tenantUrl={tenantUrl} />
-      <AppList tenantUrl={tenantUrl} />
+      <AppList tenantUrl={tenantUrl} userId={user.id} />
     </React.Fragment>
     );
   }

@@ -5,14 +5,14 @@ import useBackend from './use-backend';
 
 // simple component to render reload status:
 const ReloadStatus = ({ appId, reloads = { data: [] }, execute }) => {
-  const latest = reloads.data.find(r => r.appId);
+  const latest = reloads.data.find(r => r.appId === appId);
   if (!latest) return (<p>Unknown status (never reloaded?)</p>);
   return (<p>{latest.status}{latest.endTime ? `, ${new Date(latest.endTime).toISOString()}` : ''}</p>);
 };
 
 // simple component to render an app list row with actions:
 const AppListRow = ({ tenantUrl, app, reloads, executeReload }) => (
-  <tr>
+  <tr key={app.id}>
     <td><a href={`${tenantUrl}/sense/app/${app.resourceId}`} target="_blank">{app.resourceId}</a></td>
     <td>{app.name}</td>
     <td><ReloadStatus appId={app.resourceId} reloads={reloads} /></td>
@@ -23,9 +23,9 @@ const AppListRow = ({ tenantUrl, app, reloads, executeReload }) => (
   </tr>
 );
 
-export default function AppList({ tenantUrl }) {
+export default function AppList({ tenantUrl, userId }) {
   // fetch app list and reloads async:
-  const [apps, appsError, appsIsLoading] = useBackend({ url: '/v1/items?type=app' });
+  const [apps, appsError, appsIsLoading] = useBackend({ url: `/v1/items?type=app&sort=-createdAt&createdByUserId=${userId}` });
   const [reloads, reloadsError, reloadsIsLoading, refresh] = useBackend({ url: '/v1/reloads' });
   const [, , , executeReload] = useBackend({ url: '/v1/reloads', method: 'POST', manual: true });
   const render = c => (<section className="app-list">{c}</section>);
@@ -44,7 +44,6 @@ export default function AppList({ tenantUrl }) {
         </thead>
         <tbody>
           {apps.data.map(a => <AppListRow
-            key={app.id}
             tenantUrl={tenantUrl}
             app={a}
             reloads={reloads}
