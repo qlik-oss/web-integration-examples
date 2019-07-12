@@ -1,11 +1,23 @@
-const config = {
-    host: 'elastic.example', // <- your tenant url
-    prefix: '/',
-    port: 443,
-    isSecure: true,
-    webIntegrationId: 'BP57eMwosZKlhGgTScXtNQEQq2hBmsYR', // needed in order to whitelist your domain
-    appId: '6ca36f2e-f77d-4f1c-8e22-3e02bd703ca1', // <- should be Helpdesk Management resourceId
-  };
-  define([], function(){
-    return config;
-  });
+const url = new URL(location.href);
+
+// this should correspond to the QCS tenant URL, or QSE on Kubernetes deployment:
+const tenantUrl = url.searchParams.get('tenant') || 'https://elastic.example';
+
+// this should correspond to an web integration id that:
+// 1) exists in the `tenantUrl` above (create a new one using Management Console -> Integrations)
+// 2) has the domain for this mashup in its whitelisted domain
+const webIntegrationId = url.searchParams.get('wiid') || 'web-integration-id-here';
+
+// should be Helpdesk Management resourceId:
+const appId = url.searchParams.get('app') || 'app-id-here';
+
+const tenant = new URL(tenantUrl);
+
+module.exports = {
+  host: tenant.hostname,
+  port: 443,
+  isSecure: true,
+  prefix: '/',
+  webIntegrationId,
+  appId,
+};

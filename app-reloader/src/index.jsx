@@ -19,7 +19,7 @@ const tenantUrl = url.searchParams.get('tenant') || 'https://elastic.example';
 // this should correspond to an web integration id that:
 // 1) exists in the `tenantUrl` above (create a new one using Management Console -> Integrations)
 // 2) has the domain for this web app in its whitelisted domain
-const webIntegrationId = url.searchParams.get('wiid') || 'BP57eMwosZKlhGgTScXtNQEQq2hBmsYR';
+const webIntegrationId = url.searchParams.get('wiid') || 'web-integration-id-here';
 
 // bootstrap the Axios library which is used throughout the web app to do ajax requests towards
 // the Qlik backend APIs:
