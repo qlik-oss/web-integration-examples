@@ -4,6 +4,12 @@ Web Integrations is an implementation around the browser CORS mechanism used in 
 
 This repository contains various stand-alone web apps and mashups that is meant to showcase how you may use the Qlik APIs to e.g. authenticate users, communicate using REST and websockets, embed Qlik Sense visualizations, and more _inside a browser environment_.
 
+## Disclaimer
+
+The examples in this repository have been compiled to provide users with information about ways to use Qlik APIs to produce web applications and PI changes in Qlik Sense.  These examples are provided solely for informational purposes, and are not part of the Qlik Sense product or Documentation, nor are these examples eligible for any Qlik Support.
+
+For licensing, see [LICENSE](./LICENSE) file.
+
 ## Web apps
 
 When we use the terminology "web apps" in the context of Qlik Sense, we mean web-based applications in which you want to use the various Qlik backend APIs. Generally this means:
