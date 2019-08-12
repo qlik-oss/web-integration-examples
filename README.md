@@ -6,7 +6,7 @@ This repository contains various stand-alone web apps and mashups that is meant 
 
 ## Disclaimer
 
-The examples in this repository have been compiled to provide users with information about ways to use Qlik APIs to produce web applications and PI changes in Qlik Sense.  These examples are provided solely for informational purposes, and are not part of the Qlik Sense product or Documentation, nor are these examples eligible for any Qlik Support.
+The examples in this repository have been compiled to provide users with information about ways to use Qlik APIs to produce web applications and aPI changes in Qlik Sense.  These examples are provided solely for informational purposes, and are not part of the Qlik Sense product or Documentation, nor are these examples eligible for any Qlik Support.
 
 For licensing, see [LICENSE](./LICENSE) file.
 
