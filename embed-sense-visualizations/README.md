@@ -18,7 +18,7 @@ Start the mashup:
 1. Run `npm install` to install the project dependencies
 1. Run `npm start` which should start a development server, open the link you see in your terminal (likely http://127.0.0.1:1234)
 
-Then, upload the Helpdesk Management app (currently, you need to fetch it from Qlik Sense Desktop or google):
+Then, upload the [drugcases app](./doc/drugcases.qvf):
 
 1. Go into your hub, e.g. https://elastic.example/
 1. Select _Your content_ and then the Create button, press _Import_ and select the app
