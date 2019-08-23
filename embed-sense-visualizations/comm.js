@@ -42,7 +42,7 @@ function getTenant() {
  * @return Promise<Object> - result, from Response, of parsing the body text as JSON
  */
 function getAppList() {
-  return _request('/api/v1/items?limit=20').then(_deserialize);
+  return _request('/api/v1/items?limit=40').then(_deserialize);
 }
 
 module.exports = {

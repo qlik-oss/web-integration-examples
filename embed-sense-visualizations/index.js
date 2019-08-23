@@ -47,7 +47,7 @@ script.onload = async () => {
 document.body.appendChild(script);
 
 function renderError(error) {
-  document.querySelector("#QV01").innerHTML = `Failed to render charts: <pre><code>${error.error || error.stack || error.message || error}</code></pre>`;
+  document.querySelector('#QV01').innerHTML = `Failed to render charts: <pre><code>${error.error || error.stack || error.message || error}</code></pre>`;
 }
 
 async function initMashup() {
@@ -62,68 +62,44 @@ async function initMashup() {
   document.querySelector('#app_list').appendChild(ulElement);
 
   const appIds = list.data
-    .filter(appItem => appItem.name.indexOf('Helpdesk') !== -1)
+    .filter(appItem => appItem.name.indexOf('drug') !== -1)
     .map(appItem => appItem.resourceId);
 
   requirejs(['js/qlik'], async (qlik) => {
     const app = qlik.openApp(appIds.length ? appIds[0] : config.appId, config);
-    app.on("error", renderError);
+    app.on('error', renderError);
     app.getObject('CurrentSelections', 'CurrentSelections');
 
     try {
     //Create visualizations
-    const vis = await app.visualization.create(
-      'linechart',
-      ["Case Owner",
-        {
-          "qLibraryId": "eqZjE",
-          "qType": "measure"
-        },
-        {
-          "qLibraryId": "MPcQeZ",
-          "qType": "measure"
-        }
-      ],
-      {
-        "title": "Linechart",
-        "navigation": false,
-        "dataPoint": { "bubbleSizes": 8 },
-        "labels": { "mode": 1 },
-        "color": {
-          "auto": false,
-          "mode": "primary",
-          "useBaseColors": "off",
-          "paletteColor": {
-            "index": -1,
-            "color": "#E5A000"
+      const vis = await app.visualization.create(
+        'piechart', [
+          {
+            'qLibraryId': '4b9e766f-5842-46b5-ab3d-15c6b3020071',
+            'qDef': {
+              'qGrouping': 'N',
+              'qFieldDefs': [],
+              'qFieldLabels': [],
+            }
+          }, {
+            'qDef': {
+              'qLabel': '',
+              'qDescription': '',
+              'qTags': [],
+              'qGrouping': 'N',
+              'qDef': 'count(Drug_caseID)',
+            }
           }
+        ],{
+          'title': 'Total drug cases per continent',
         }
-      }
-    );
+      );
 
-    vis.show("QV01");
+    vis.show('QV01');
 
-    const vis2 = await app.visualization.create(
-      'barchart',
-      ["Case Owner Group", "=Avg([Case Duration Time])"],
-      {
-        "title": "Barchart",
-        "orientation": "horizontal",
-        "dataPoint": { "showLabels": true },
-        "gridLine": { "auto": false, "spacing": 3 },
-        "color": {
-          "auto": false,
-          "mode": "primary",
-          "useBaseColors": "off",
-          "paletteColor": {
-            "index": -1,
-            "color": "#E5A000"
-          }
-        }
-      }
-    );
+    const vis2 = await app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a');
 
-    vis2.show("QV02");
+    vis2.show('QV02');
     } catch(error) {
       renderError(error);
     }
