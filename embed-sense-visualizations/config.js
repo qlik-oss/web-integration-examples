@@ -15,7 +15,7 @@ const tenant = new URL(tenantUrl);
 
 module.exports = {
   host: tenant.hostname,
-  port: 443,
+  port: tenant.port || 443,
   isSecure: true,
   prefix: '/',
   webIntegrationId,
