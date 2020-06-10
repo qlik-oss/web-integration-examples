@@ -1,8 +1,6 @@
 # Web Integration Examples
 
-*Note*: Available in QCS, and in QSEoK (qliksense chart) from version 1.7.0 (~July 25th 2019).
-
-Web Integrations is an implementation around the browser CORS mechanism used in QSEoK and QCS. Web Integrations allows a tenant admin to control which third-party domains are allowed to interact with their tenant backend APIs. In essence, if you create a web app or mashup that is hosted on another domain than the QSE deployment, you would need to create a web integration in the management console. In each web integration, you maintain a list of allowed (whitelisted) origins/domains.
+Web Integrations is an implementation around the browser CORS mechanism used in QSEoK and Qlik Sense SaaS. Web Integrations allows a tenant admin to control which third-party domains are allowed to interact with their tenant backend APIs. In essence, if you create a web app or mashup that is hosted on another domain than the QSE deployment, you would need to create a web integration in the management console. In each web integration, you maintain a list of allowed (whitelisted) origins/domains.
 
 This repository contains various stand-alone web apps and mashups that is meant to showcase how you may use the Qlik APIs to e.g. authenticate users, communicate using REST and websockets, embed Qlik Sense visualizations, and more _inside a browser environment_.
 
