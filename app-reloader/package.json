@@ -14,7 +14,7 @@
   "dependencies": {
     "axios": "0.21.0",
     "axios-cache-adapter": "2.5.0",
-    "axios-hooks": "2.1.0",
+    "axios-hooks": "2.2.0",
     "babel-polyfill": "6.26.0",
     "react": "17.0.1",
     "react-dom": "17.0.1"
