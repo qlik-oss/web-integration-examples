@@ -12,7 +12,7 @@
     "parcel-bundler": "1.12.4"
   },
   "dependencies": {
-    "axios": "0.21.0",
+    "axios": "0.21.1",
     "axios-cache-adapter": "2.5.0",
     "axios-hooks": "2.2.0",
     "babel-polyfill": "6.26.0",
