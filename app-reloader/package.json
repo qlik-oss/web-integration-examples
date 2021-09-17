@@ -9,14 +9,14 @@
   "author": "QlikTech International AB",
   "license": "Apache-2.0",
   "devDependencies": {
-    "parcel-bundler": "1.12.4"
+    "parcel-bundler": "1.12.5"
   },
   "dependencies": {
-    "axios": "0.21.2",
-    "axios-cache-adapter": "2.5.0",
-    "axios-hooks": "2.3.0",
+    "axios": "0.21.4",
+    "axios-cache-adapter": "2.7.3",
+    "axios-hooks": "2.7.0",
     "babel-polyfill": "6.26.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
