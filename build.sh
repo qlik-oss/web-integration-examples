@@ -1,10 +1,10 @@
-rm -rf pages/
-mkdir -p pages/
+rm -rf docs/
+mkdir -p docs/
 cd app-reloader
 npm i
 npm run build
-mv dist ../pages/app-reloader
+mv dist ../docs/app-reloader
 cd ../embed-sense-visualizations
 npm i
 npm run build
-mv dist ../pages/embed
+mv dist ../docs/embed
