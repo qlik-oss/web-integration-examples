@@ -4,7 +4,7 @@
   "description": "A plain web application example using the Qlik backend APIs without mashup/capability APIs",
   "scripts": {
     "start": "parcel --host 127.0.0.1 src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build --public-url=https://qlik-oss.github.io/web-integration-examples/app-reloader/ src/index.html"
   },
   "author": "QlikTech International AB",
   "license": "Apache-2.0",

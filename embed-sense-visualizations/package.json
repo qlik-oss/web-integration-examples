@@ -4,7 +4,7 @@
   "description": "An example mashup showing how to use the webIntegrationId when using the capability APIs.",
   "scripts": {
     "start": "parcel --host 127.0.0.1 index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build --public-url=https://qlik-oss.github.io/web-integration-examples/embed/ index.html"
   },
   "author": "QlikTech International AB",
   "license": "Apache-2.0",
