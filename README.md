@@ -1,12 +1,12 @@
 # Web Integration Examples
 
-Web Integrations is an implementation around the browser CORS mechanism used in QSEoK and Qlik Sense SaaS. Web Integrations allows a tenant admin to control which third-party domains are allowed to interact with their tenant backend APIs. In essence, if you create a web app or mashup that is hosted on another domain than the QSE deployment, you would need to create a web integration in the management console. In each web integration, you maintain a list of allowed (whitelisted) origins/domains.
+Web Integrations is an implementation around the browser CORS mechanism used in Qlik Cloud. Web Integrations allows a tenant admin to control which third-party domains are allowed to interact with their tenant backend APIs. In essence, if you create a web app or mashup that is hosted on another domain than the tenant, you would need to create a web integration in the management console. In each web integration, you maintain a list of allowed (whitelisted) origins/domains.
 
 This repository contains various stand-alone web apps and mashups that is meant to showcase how you may use the Qlik APIs to e.g. authenticate users, communicate using REST and websockets, embed Qlik Sense visualizations, and more _inside a browser environment_.
 
 ## Disclaimer
 
-The examples in this repository have been compiled to provide users with information about ways to use Qlik APIs to produce web applications and API changes in Qlik Sense.  These examples are provided solely for informational purposes, and are not part of the Qlik Sense product or Documentation, nor are these examples eligible for any Qlik Support.
+The examples in this repository have been compiled to provide users with information about ways to use Qlik APIs to produce web applications and API changes in Qlik Cloud.  These examples are provided solely for informational purposes, and are not part of the Qlik Sense product or Documentation, nor are these examples eligible for any Qlik Support.
 
 For licensing, see [LICENSE](./LICENSE) file.
 
@@ -28,5 +28,5 @@ See below for a high-level explanation of the various web apps and mashups.
 
 | Title                                                                   | Type    | Description | Deployment |
 | ----------------------------------------------------------------------- | ------- | ----------- | -----------|
-| [App Reloader](./app-reloader)                                          | Web app | This example shows you how to deal with authentication of users, and how to configure and use the necessary web integration and CSRF header when interacting with the Qlik backend APIs. | https://web-integration-examples.netlify.com/app-reloader/?tenant=https://elastic.example&wiid=web-integration-id |
-| [Embed Qlik Sense Visualizations](./embed-sense-visualizations)         | Mashup  | An example on how you can embed Qlik Sense visualizations in a webpage using the capability APIs. | https://web-integration-examples.netlify.com/embed/?tenant=https://elastic.example&wiid=web-integration-id&app=app-id |
+| [App Reloader](./app-reloader)                                          | Web app | This example shows you how to deal with authentication of users, and how to configure and use the necessary web integration and CSRF header when interacting with the Qlik backend APIs. | <https://web-integration-examples.netlify.com/app-reloader/?tenant=https://elastic.example&wiid=web-integration-id> |
+| [Embed Qlik Sense Visualizations](./embed-sense-visualizations)         | Mashup  | An example on how you can embed Qlik Sense visualizations in a webpage using the capability APIs. | <https://web-integration-examples.netlify.com/embed/?tenant=https://elastic.example&wiid=web-integration-id&app=app-id> |
