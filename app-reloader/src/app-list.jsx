@@ -4,8 +4,11 @@ import './app-list.css';
 import useBackend from './use-backend';
 
 // simple component to render reload status:
-const ReloadStatus = ({ appId, reloads = { data: [] }, execute }) => {
-  const latest = reloads.data.find(r => r.appId === appId);
+const ReloadStatus = ({ appId, execute }) => {
+  const [reloads, reloadsError, reloadsIsLoading, refresh] = useBackend({ url: `/v1/reloads?appId=${appId}` });
+  if (reloadsIsLoading) return (<p>Loading...</p>);
+  if (reloadsError) return (<p>Cannot load reload status, possible permission issue</p>);
+  const latest = reloads.data[0];
   if (!latest) return (<p>Unknown status (never reloaded?)</p>);
   return (<p>{latest.status}{latest.endTime ? `, ${new Date(latest.endTime).toISOString()}` : ''}</p>);
 };
@@ -24,20 +27,18 @@ const AppListRow = ({ tenantUrl, app, reloads, executeReload }) => (
 );
 
 export default function AppList({ tenantUrl, userId }) {
-  // fetch app list and reloads async:
+  // fetch app list:
   const [apps, appsError, appsIsLoading] = useBackend({ url: `/v1/items?type=app&sort=-createdAt&createdByUserId=${userId}` });
-  const [reloads, reloadsError, reloadsIsLoading, refresh] = useBackend({ url: '/v1/reloads' });
   const [, , , executeReload] = useBackend({ url: '/v1/reloads', method: 'POST', manual: true });
   const render = c => (<section className="app-list">{c}</section>);
 
-  // apps and reloads errors are handled higher up in the stack (error-boundary):
-  if (appsError || reloadsError) throw appsError || reloadsError;
+  // apps errors are handled higher up in the stack (error-boundary):
+  if (appsError) throw appsError;
   if (appsIsLoading) return render(<p>Loading...</p>);
 
   return render(
     <React.Fragment>
       <h1>App list</h1>
-      <button onClick={refresh}>Refresh reload statuses</button>
       <table>
         <thead>
           <tr><th>ID</th><th>Name</th><th>Current Status</th><th></th></tr>
@@ -46,7 +47,6 @@ export default function AppList({ tenantUrl, userId }) {
           {apps.data.map(a => <AppListRow
             tenantUrl={tenantUrl}
             app={a}
-            reloads={reloads}
             executeReload={executeReload}
           />)}
         </tbody>
