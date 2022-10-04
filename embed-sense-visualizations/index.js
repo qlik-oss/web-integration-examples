@@ -1,4 +1,5 @@
 require('babel-polyfill');
+import { downloadVisualization } from './reporting-utils';
 
 const config = require('./config');
 const { getUser, getTenant, getAppList, baseUrl } = require('./comm');
@@ -13,19 +14,23 @@ script.src = `${baseUrl}/resources/assets/external/requirejs/require.js`;
 script.onload = async () => {
   requirejs.config({
     baseUrl: baseUrl + '/resources',
-    webIntegrationId: config.webIntegrationId
+    webIntegrationId: config.webIntegrationId,
   });
 
   // build a single-sign on URL and return back here once completed:
   const loginUrl = new URL(`${baseUrl}/login`);
   loginUrl.searchParams.append('returnto', location.href);
   loginUrl.searchParams.append('qlik-web-integration-id', config.webIntegrationId);
-  
+
   const loginBtn = document.querySelector('#login');
-  loginBtn.addEventListener('click', () => { location.href = loginUrl; });
-  
+  loginBtn.addEventListener('click', () => {
+    location.href = loginUrl;
+  });
+
   const logoutBtn = document.querySelector('#logout');
-  logoutBtn.addEventListener('click', () => { location.href = new URL(`${baseUrl}/logout`); });
+  logoutBtn.addEventListener('click', () => {
+    location.href = new URL(`${baseUrl}/logout`);
+  });
 
   const [user, tenant] = await Promise.all([getUser(), getTenant()]);
   if (user || tenant) {
@@ -47,14 +52,16 @@ script.onload = async () => {
 document.body.appendChild(script);
 
 function renderError(error) {
-  document.querySelector('#QV01').innerHTML = `Failed to render charts: <pre><code>${error.error || error.stack || error.message || error}</code></pre>`;
+  document.querySelector('#QV01').innerHTML = `Failed to render charts: <pre><code>${
+    error.error || error.stack || error.message || error
+  }</code></pre>`;
 }
 
 async function initMashup() {
   const list = await getAppList();
   const ulElement = document.createElement('ul');
 
-  list.data.forEach(appItem => {
+  list.data.forEach((appItem) => {
     const liElement = document.createElement('li');
     liElement.innerHTML = `<b>${appItem.name}</b> - ${appItem.resourceId}`;
     ulElement.appendChild(liElement);
@@ -62,8 +69,11 @@ async function initMashup() {
   document.querySelector('#app_list').appendChild(ulElement);
 
   const appIds = list.data
-    .filter(appItem => appItem.name.indexOf('drug') !== -1)
-    .map(appItem => appItem.resourceId);
+    .filter((appItem) => appItem.name.indexOf('drug') !== -1)
+    .map((appItem) => appItem.resourceId);
+
+  document.querySelector('#QV01').innerHTML = 'Generating visualization...';
+  document.querySelector('#QV02').innerHTML = 'Generating visualization...';
 
   requirejs(['js/qlik'], async (qlik) => {
     const app = qlik.openApp(appIds.length ? appIds[0] : config.appId, config);
@@ -71,36 +81,70 @@ async function initMashup() {
     app.getObject('CurrentSelections', 'CurrentSelections');
 
     try {
-    //Create visualizations
+      //Create visualizations
       const vis = await app.visualization.create(
-        'piechart', [
+        'piechart',
+        [
           {
-            'qLibraryId': '4b9e766f-5842-46b5-ab3d-15c6b3020071',
-            'qDef': {
-              'qGrouping': 'N',
-              'qFieldDefs': [],
-              'qFieldLabels': [],
-            }
-          }, {
-            'qDef': {
-              'qLabel': '',
-              'qDescription': '',
-              'qTags': [],
-              'qGrouping': 'N',
-              'qDef': 'count(Drug_caseID)',
-            }
-          }
-        ],{
-          'title': 'Total drug cases per continent',
+            qLibraryId: '4b9e766f-5842-46b5-ab3d-15c6b3020071',
+            qDef: {
+              qGrouping: 'N',
+              qFieldDefs: [],
+              qFieldLabels: [],
+            },
+          },
+          {
+            qDef: {
+              qLabel: '',
+              qDescription: '',
+              qTags: [],
+              qGrouping: 'N',
+              qDef: 'count(Drug_caseID)',
+            },
+          },
+        ],
+        {
+          title: 'Total drug cases per continent',
         }
       );
 
-    vis.show('QV01');
+      const linechartBoundingClientRect = document.querySelector('#QV01').getBoundingClientRect();
+      const linechartDownloadBtn = document.querySelector('#linechart-download-btn');
+      const linechartDownloadSelect = document.querySelector('#linechart-select');
+      const linechartDownloadLink = document.querySelector('#linechart-download-link');
+      const linechartDownloadSpinner = document.querySelector('#linechart-download-spinner');
+      linechartDownloadSelect.addEventListener('change', async () => {
+        linechartDownloadLink.classList.add('not-visible');
+        linechartDownloadSpinner.classList.add('not-visible');
+        linechartDownloadBtn.disabled = false;
+      });
+      linechartDownloadBtn.addEventListener('click', async () => {
+        linechartDownloadLink.classList.add('not-visible');
+        linechartDownloadSpinner.classList.remove('not-visible');
+        linechartDownloadBtn.disabled = true;
+        linechartDownloadSelect.disabled = true;
 
-    const vis2 = await app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a');
+        const url = await downloadVisualization(
+          vis,
+          linechartDownloadSelect.value,
+          linechartBoundingClientRect.width,
+          linechartBoundingClientRect.height
+        );
+        linechartDownloadLink.href = url;
+        linechartDownloadLink.classList.remove('not-visible');
+        linechartDownloadSpinner.classList.add('not-visible');
+        linechartDownloadBtn.disabled = false;
+        linechartDownloadSelect.disabled = false;
+      });
 
-    vis2.show('QV02');
-    } catch(error) {
+      vis.show('QV01').then(() => {
+        linechartDownloadSelect.disabled = false;
+      });
+
+      const vis2 = await app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a');
+
+      vis2.show('QV02');
+    } catch (error) {
       renderError(error);
     }
   });

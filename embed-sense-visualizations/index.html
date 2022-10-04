@@ -51,6 +51,16 @@
         <div id="linechart" tabindex="0" class="chart-padding-container" aria-label="Linechart">
           <div id="QV01" class="object"></div>
         </div>
+        <div class="chart-download-container">
+          <select id="linechart-select" name="linechart-select" disabled class="chart-download-select">
+            <option value="" default selected>Select download type</option>
+            <option value="image">Image</option>
+            <option value="pdf">PDF</option>
+          </select>
+          <button id="linechart-download-btn" disabled class="chart-download-button">Download</button>
+          <a id="linechart-download-link" download target="_blank" class="not-visible"> Download Link </a>
+          <img id="linechart-download-spinner" src="spinner.gif" class="chart-download-spinner not-visible">
+        </div>
         <div id="barchart" tabindex="0" class="chart-padding-container" aria-label="Barchart">
           <div id="QV02" class="object"></div>
         </div>
