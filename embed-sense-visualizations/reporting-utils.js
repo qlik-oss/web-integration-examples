@@ -8,7 +8,10 @@ export const downloadVisualization = (vis, type, width = 500, height = 400) => {
         width,
         height,
       };
-      return vis.exportImg(settings);
+      return vis.exportImg(settings).then((result) => {
+        console.log(`The image is available at url ${result}`);
+        return result;
+      });
     }
     case 'pdf': {
       const settings = {
@@ -17,7 +20,10 @@ export const downloadVisualization = (vis, type, width = 500, height = 400) => {
         orientation: 'landscape',
         objectSize: { width, height },
       };
-      return vis.exportPdf(settings);
+      return vis.exportPdf(settings).then((result) => {
+        console.log(`The PDF is available at url ${result}`);
+        return result;
+      });
     }
   }
 };
