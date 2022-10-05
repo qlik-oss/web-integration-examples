@@ -57,6 +57,45 @@ function renderError(error) {
   }</code></pre>`;
 }
 
+/**
+ * enable the download button on the linechart visualization. Setup the proper event listeners to run the download
+ *  and show the spinner when the download button is clicked. When the download content is ready, display the download
+ *  content URL in the link next to the download button.
+ * @param visualization
+ * @returns {Promise<void>}
+ */
+async function enableLinechartDownload(visualization) {
+  const linechartBoundingClientRect = document.querySelector('#QV01').getBoundingClientRect();
+  const linechartDownloadBtn = document.querySelector('#linechart-download-btn');
+  const linechartDownloadSelect = document.querySelector('#linechart-select');
+  const linechartDownloadLink = document.querySelector('#linechart-download-link');
+  const linechartDownloadSpinner = document.querySelector('#linechart-download-spinner');
+  linechartDownloadSelect.disabled = false;
+  linechartDownloadSelect.addEventListener('change', async () => {
+    linechartDownloadLink.classList.add('not-visible');
+    linechartDownloadSpinner.classList.add('not-visible');
+    linechartDownloadBtn.disabled = false;
+  });
+  linechartDownloadBtn.addEventListener('click', async () => {
+    linechartDownloadLink.classList.add('not-visible');
+    linechartDownloadSpinner.classList.remove('not-visible');
+    linechartDownloadBtn.disabled = true;
+    linechartDownloadSelect.disabled = true;
+
+    const url = await downloadVisualization(
+        visualization,
+        linechartDownloadSelect.value,
+        linechartBoundingClientRect.width,
+        linechartBoundingClientRect.height
+    );
+    linechartDownloadLink.href = url;
+    linechartDownloadLink.classList.remove('not-visible');
+    linechartDownloadSpinner.classList.add('not-visible');
+    linechartDownloadBtn.disabled = false;
+    linechartDownloadSelect.disabled = false;
+  });
+}
+
 async function initMashup() {
   const list = await getAppList();
   const ulElement = document.createElement('ul');
@@ -108,37 +147,9 @@ async function initMashup() {
         }
       );
 
-      const linechartBoundingClientRect = document.querySelector('#QV01').getBoundingClientRect();
-      const linechartDownloadBtn = document.querySelector('#linechart-download-btn');
-      const linechartDownloadSelect = document.querySelector('#linechart-select');
-      const linechartDownloadLink = document.querySelector('#linechart-download-link');
-      const linechartDownloadSpinner = document.querySelector('#linechart-download-spinner');
-      linechartDownloadSelect.addEventListener('change', async () => {
-        linechartDownloadLink.classList.add('not-visible');
-        linechartDownloadSpinner.classList.add('not-visible');
-        linechartDownloadBtn.disabled = false;
-      });
-      linechartDownloadBtn.addEventListener('click', async () => {
-        linechartDownloadLink.classList.add('not-visible');
-        linechartDownloadSpinner.classList.remove('not-visible');
-        linechartDownloadBtn.disabled = true;
-        linechartDownloadSelect.disabled = true;
-
-        const url = await downloadVisualization(
-          vis,
-          linechartDownloadSelect.value,
-          linechartBoundingClientRect.width,
-          linechartBoundingClientRect.height
-        );
-        linechartDownloadLink.href = url;
-        linechartDownloadLink.classList.remove('not-visible');
-        linechartDownloadSpinner.classList.add('not-visible');
-        linechartDownloadBtn.disabled = false;
-        linechartDownloadSelect.disabled = false;
-      });
-
       vis.show('QV01').then(() => {
-        linechartDownloadSelect.disabled = false;
+        // enable the download button when the chart is ready
+        enableLinechartDownload(vis)
       });
 
       const vis2 = await app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a');
