@@ -65,6 +65,32 @@ body, html {
   margin: 20px;
 }
 
+.chart-download-container {
+  display: inline-block;
+}
+
+.chart-download-button:hover {
+  cursor: pointer;
+}
+
+.chart-download-select:hover {
+  cursor: pointer;
+}
+
+.chart-download-select option[default] {
+  display: none;
+}
+
+.chart-download-spinner {
+  width: 20px;
+  background-color: white;
+  margin-bottom: -4px;
+}
+
+.not-visible {
+  display: none;
+}
+
 .object {
   position: relative;
   width: 100%;
