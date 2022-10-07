@@ -65,31 +65,25 @@ function renderError(error) {
  * @returns {Promise<void>}
  */
 async function enableLinechartDownload(visualization) {
-  const linechartBoundingClientRect = document.querySelector('#QV01').getBoundingClientRect();
   const linechartDownloadBtn = document.querySelector('#linechart-download-btn');
   const linechartDownloadSelect = document.querySelector('#linechart-select');
-  const linechartDownloadLink = document.querySelector('#linechart-download-link');
   const linechartDownloadSpinner = document.querySelector('#linechart-download-spinner');
   linechartDownloadSelect.disabled = false;
   linechartDownloadSelect.addEventListener('change', async () => {
-    linechartDownloadLink.classList.add('not-visible');
     linechartDownloadSpinner.classList.add('not-visible');
     linechartDownloadBtn.disabled = false;
   });
   linechartDownloadBtn.addEventListener('click', async () => {
-    linechartDownloadLink.classList.add('not-visible');
     linechartDownloadSpinner.classList.remove('not-visible');
     linechartDownloadBtn.disabled = true;
     linechartDownloadSelect.disabled = true;
-
-    const url = await downloadVisualization(
-        visualization,
-        linechartDownloadSelect.value,
-        linechartBoundingClientRect.width,
-        linechartBoundingClientRect.height
+    const linechartBoundingClientRect = document.querySelector('#QV01').getBoundingClientRect();
+    await downloadVisualization(
+      visualization,
+      linechartDownloadSelect.value,
+      linechartBoundingClientRect.width,
+      linechartBoundingClientRect.height
     );
-    linechartDownloadLink.href = url;
-    linechartDownloadLink.classList.remove('not-visible');
     linechartDownloadSpinner.classList.add('not-visible');
     linechartDownloadBtn.disabled = false;
     linechartDownloadSelect.disabled = false;
@@ -149,7 +143,7 @@ async function initMashup() {
 
       vis.show('QV01').then(() => {
         // enable the download button when the chart is ready
-        enableLinechartDownload(vis)
+        enableLinechartDownload(vis);
       });
 
       const vis2 = await app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a');
