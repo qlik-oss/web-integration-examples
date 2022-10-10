@@ -12,5 +12,8 @@
     "babel-polyfill": "6.26.0",
     "parcel-bundler": "1.12.5",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "file-saver": "^2.0.5"
   }
 }

@@ -45,9 +45,27 @@ function getAppList() {
   return _request('/api/v1/items?limit=40').then(_deserialize);
 }
 
+/**
+ * fetching the file represented with the url given in input
+ * @param url
+ * @returns {Promise<Blob>} - result, from Response, a promise that will fulfill with a new Blob object.
+ */
+function getFileContent(url) {
+  return fetch(url, {
+    method: 'GET',
+    mode: 'cors', // cors must be enabled
+    credentials: 'include', // credentials must be included
+    headers: {
+      'Content-Type': 'application/json',
+      'qlik-web-integration-id': webIntegrationId, // needed in order to whitelist your domain
+    }
+  }).then(response => response.blob());
+}
+
 module.exports = {
   getUser,
   getTenant,
   getAppList,
+  getFileContent,
   baseUrl
 };
