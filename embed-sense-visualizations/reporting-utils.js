@@ -37,6 +37,16 @@ export const downloadVisualization = (visualization, type, width = 500, height =
         downloadFile(result, visualization.id, 'pdf');
       }, exportError);
     }
+    case 'data': {
+      const settings = {
+       format: 'OOXML',
+       state: 'A'
+      };
+      return visualization.exportData(settings).then((result) => {
+        console.log(`The XLSX is available at url ${result}`);
+        downloadFile(result, visualization.id, 'xlsx');
+      }, exportError);
+    }
   }
 };
 
