@@ -6,6 +6,14 @@
 version: 2
 updates:
   - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+    directory: "/app-reloader" # Location of package manifests
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: chore
+  - package-ecosystem: "npm"
+    directory: "/embed-sense-visualizations"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: chore
