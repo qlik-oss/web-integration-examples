@@ -41,8 +41,8 @@ function getTenant() {
  * fetching the app list from the collections API
  * @return Promise<Object> - result, from Response, of parsing the body text as JSON
  */
-function getAppList() {
-  return _request('/api/v1/items?limit=40').then(_deserialize);
+function getAppList(filter) {
+  return _request(`/api/v1/items?limit=40${filter ? '&query=' + filter : ''}`).then(_deserialize);
 }
 
 /**
