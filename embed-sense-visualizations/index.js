@@ -52,9 +52,8 @@ script.onload = async () => {
 document.body.appendChild(script);
 
 function renderError(error) {
-  document.querySelector('#QV01').innerHTML = `Failed to render charts: <pre><code>${
-    error.error || error.stack || error.message || error
-  }</code></pre>`;
+  document.querySelector('#QV01').innerHTML = `Failed to render charts: <pre><code>${error.error || error.stack || error.message || error
+    }</code></pre>`;
 }
 
 /**
@@ -91,7 +90,7 @@ async function enableLinechartDownload(visualization) {
 }
 
 async function initMashup() {
-  const list = await getAppList();
+  const list = await getAppList('drugcases');
   const ulElement = document.createElement('ul');
 
   list.data.forEach((appItem) => {
@@ -108,14 +107,14 @@ async function initMashup() {
   document.querySelector('#QV01').innerHTML = 'Generating visualization...';
   document.querySelector('#QV02').innerHTML = 'Generating visualization...';
 
-  requirejs(['js/qlik'], async (qlik) => {
+  requirejs(['js/qlik'], (qlik) => {
     const app = qlik.openApp(appIds.length ? appIds[0] : config.appId, config);
     app.on('error', renderError);
     app.getObject('CurrentSelections', 'CurrentSelections');
 
     try {
       //Create visualizations
-      const vis = await app.visualization.create(
+      app.visualization.create(
         'piechart',
         [
           {
@@ -139,16 +138,18 @@ async function initMashup() {
         {
           title: 'Total drug cases per continent',
         }
-      );
-
-      vis.show('QV01').then(() => {
-        // enable the download button when the chart is ready
-        enableLinechartDownload(vis);
+      ).then(vis => {
+        vis.show('QV01').then(() => {
+          // enable the download button when the chart is ready
+          enableLinechartDownload(vis);
+        });
       });
 
-      const vis2 = await app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a');
 
-      vis2.show('QV02');
+      app.visualization.get('ced9d474-cad3-4df5-bc09-06d27dcf634a').then(vis => {
+        vis.show('QV02');
+      });
+
     } catch (error) {
       renderError(error);
     }
