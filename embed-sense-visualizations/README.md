@@ -4,7 +4,7 @@ This is an example mashup showing how to use the webIntegrationId when using the
 
 ## Prerequisites
 
-* A QCS tenant configured
+* A Qlik Cloud tenant configured
 * Tenant administrator privileges to create a web integration
 
 ## Get started
@@ -23,7 +23,7 @@ Then, upload the [drugcases app](./doc/drugcases.qvf):
 1. Go into your hub, e.g. <https://your-tenant.us.qlikcloud.com/>
 2. Select _Your content_ and then the Create button, press _Import_ and select the app
 
-Lastly, configure your QCS tenant (requires tenant admin):
+Lastly, configure your Qlik Cloud tenant (requires tenant admin):
 
 1. Go into your management console, e.g. <https://your-tenant.us.qlikcloud.com/console>
 1. To your left, select _Integrations -> Web_ and create a new web integration, make sure you add <http://127.0.0.1:1234> (or whatever URL is shown in your terminal above) to your whitelist

@@ -3,7 +3,7 @@
 This is a simple web application that uses the new Qlik SaaS APIs to showcase how you can:
 
 * Build modern web applications and integrate with Qlik APIs
-* Sign in users on a QCS tenant
+* Sign in users on a Qlik Cloud tenant
 * Configure REST calls to work against said deployments
 
 All without using the regular front-end "mashup" APIs from Qlik like the Capability API.
@@ -11,7 +11,7 @@ All without using the regular front-end "mashup" APIs from Qlik like the Capabil
 ## Prerequisites
 
 * Some modern web development knowledge (Node.js / browsers)
-* A QCS tenant configured
+* A Qlik Cloud tenant configured
 * Tenant administrator privileges to create a web integration
 
 ## Get started
@@ -24,7 +24,7 @@ Start the web app:
 1. Run `npm install` to install the project dependencies
 1. Run `npm start` which should start a development server, open the link you see in your terminal (likely <http://127.0.0.1:1234>)
 
-Then, configure your QCS tenant (requires tenant admin):
+Then, configure your Qlik Cloud tenant (requires tenant admin):
 
 1. Go into your management console, e.g. <https://your-tenant.us.qlikcloud.com/console>
 1. To your left, select _Integrations -> Web_ and create a new web integration, make sure you add <http://127.0.0.1:1234> (or whatever URL is shown in your terminal above) to your whitelist
