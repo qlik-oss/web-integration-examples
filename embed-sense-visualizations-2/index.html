@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Qlik Cloud: Mashup</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta http-equiv="cleartype" content="on">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Reenie+Beanie" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body role="application">
+  <div id="CurrentSelections" class="qvobjects">
+  </div>
+  <div class="content">
+    <div class="section info">
+      <div class="image">
+        <div class="overlay">
+          <div class="textWrapper">
+            <h1 class="header">Embed Sense Visualizations</h1>
+            <div class="divider"></div>
+            <div class="description-text">
+              <p class="logged_in">You are not logged in,<br /> if you previously had a session you need to login again.
+              </p>
+              <p class="logged_out">Welcome back, <span><code id="user"></code> </span><br />
+                from tenant <span><code id="tenant"></code></span>
+              </p>
+            </div>
+            <div class="buttons-container">
+              <button class="rounded-button" id="login" disabled>login</button>
+              <button class="rounded-button" id="logout" disabled>logout</button>
+            </div>
+            <div class="divider"></div>
+            <h1 class="header">App list</h1>
+            <p id="app_list">
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="visualizations-wrapper">
+        <div id="linechart" tabindex="0" class="chart-padding-container" aria-label="Linechart">
+          <div id="QV01" class="object"></div>
+        </div>
+        <div class="chart-download-container">
+          <select id="linechart-select" name="linechart-select" disabled class="chart-download-select">
+            <option value="" default selected>Select download type</option>
+            <option value="image">Image</option>
+            <option value="pdf">PDF</option>
+            <option value="data">Data</option>
+          </select>
+          <button id="linechart-download-btn" disabled class="chart-download-button">Download</button>
+          <img id="linechart-download-spinner" src="spinner.gif" class="chart-download-spinner not-visible">
+        </div>
+        <div id="barchart" tabindex="0" class="chart-padding-container" aria-label="Barchart">
+          <div id="QV02" class="object"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="./index.js"></script>
+</body>
+
+</html>
